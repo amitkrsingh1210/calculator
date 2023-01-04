@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>simple calculator</title>
+        <style>
+            .calculator{
+                width: 400px;
+                height:400px;
+                background:#333;
+                margin:150px auto;
+                border-radius: 20px;
+
+            }
+            .result{
+                width: 90%;
+                height: 60px;
+                line-height: 60px;
+                text-align: right;
+                padding-right: 20px;
+                background:#ccc;
+                margin:50px auto;
+                border-radius: 5px;
+                position: relative;
+                top :30px;
+
+
+            }
+            .t123{
+                width: 100%;
+                height: 280px;
+                text-align: center;
+                
+            }
+            table button{
+                padding: 20px;
+                font-weight: bold;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="calculator">
+            <div class="result"></div> 
+            <table class="t123">
+                <tr>
+                    <td>
+                        <button onclick="anil(this)">7</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">8</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">9</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">*</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="anil(this)">4</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">5</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">6</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">/</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="anil(this)">1</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">2</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">3</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">+</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="anil(this)">0</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">.</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">=</button>
+                    </td>
+                    <td>
+                        <button onclick="anil(this)">-</button>
+                    </td>
+                </tr>
+            </table>
+             
+        </div>
+      
+        <script>
+             var isOperatorButtonClicked = false;
+             var res = document.querySelector("div.result");
+             var leftValue;
+             var rightValue;
+            
+            // 1. function defination
+        
+            function anil(elem){
+                console.log(elem);
+                res.innerHTML = res.innerHTML + elem.innerHTML;
+                switch(elem.innerHTML) {
+                case'*':
+                    isOperatorButtonClicked = true;
+                    //code block
+                    operator='*';
+                    window.localStorage.setItem('operator','*');
+                    leftValue = res.innerHTML;
+                    rightValue= res.innerHTML;
+                    window.localStorage.setItem('leftValue',leftValue);
+                    window.localStorage.setItem('rightValue',rightValue);
+                    console.log('leftValue is',leftValue);
+                    console.log('rightValue is',rightValue);
+                    break;
+                case'/':
+                    isOperatorButtonClicked = true;
+                    //code block
+                    operator='/';
+                    window.localStorage.setItem('operator','/');
+                    leftValue = res.innerHTML;
+                    window.localStorage.setItem('leftValue',leftValue);
+                    window.localStorage.setItem('rightValue',rightValue);
+                    console.log('leftValue is',leftValue);
+                    console.log('rightValue is',rightValue);
+                    break;
+                case'+':
+                    isOperatorButtonClicked = true;
+                    //code block
+                    operator='+';
+                    window.localStorage.setItem('operator','+');
+                    leftValue = res.innerHTML;
+                    window.localStorage.setItem('leftValue',leftValue);
+                    window.localStorage.setItem('rightValue',rightValue);
+                    console.log('leftValue is',leftValue);
+                    console.log('rightValue is',rightValue);
+                    break;
+                case'-':
+                    isOperatorButtonClicked = true;
+                    //code block ;
+                    operator='-'
+                    window.localStorage.setItem('operator','-');
+                    leftValue = res.innerHTML;
+                    window.localStorage.setItem('leftValue',leftValue);
+                    window.localStorage.setItem('rightValue',rightValue);
+                    console.log('leftValue is',leftValue);
+                    console.log('rightValue is',rightValue);
+                    break;
+                case'=':
+                    //code block
+                    isOperatorButtonClicked = false;
+                    console.log('result');
+                    leftValue = window.localStorage.getItem('leftValue');
+                    rightValue = window.localStorage.getItem('rightValue');
+                    operator= window.localStorage.getItem('operator');
+                    switch(operator){
+                            case'*':
+                                leftValue = parseFloat(leftValue);
+                                rightValue = parseFloat(rightValue);
+                                console.log(leftValue*rightValue);
+                                res.innerHTML = leftValue*rightValue;
+                                break;
+                            case'/':
+                                leftValue = parseFloat(leftValue);
+                                rightValue = parseFloat(rightValue);
+                                console.log(leftValue/rightValue);
+                                res.innerHTML = leftValue/rightValue;
+                                break;
+                            case'+':
+                                leftValue = parseFloat(leftValue);
+                                rightValue = parseFloat(rightValue);
+                                console.log(leftValue + rightValue);
+                                res.innerHTML = leftValue + rightValue;
+                                break;
+                            case'-':
+                                leftValue = parseFloat(leftValue);
+                                rightValue = parseFloat(rightValue);
+                                console.log(leftValue - rightValue);
+                                res.innerHTML = leftValue - rightValue;
+                                break;
+                            default: 
+                        }
+                    break;
+                default: 
+                }
+                if(isOperatorButtonClicked === true){
+                    rightValue =  elem.innerHTML;
+                    rightValue = window.localStorage.setItem('rightValue',rightValue);
+                    console.log('rightValue',elem.innerHTML);
+                }
+            }
+
+        </script>
+    </body>
+</html>
